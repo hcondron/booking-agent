@@ -78,12 +78,7 @@ export async function handleWebhook(req, res) {
               });
 
               // Process the transcribed text with the agent
-              const agentResponse = await bookingAgent.message({
-                text,
-                userNumber,
-                userName,
-                history: userContext.conversationHistory,
-              });
+              const agentResponse = await bookingAgent.generate(text);
 
               console.log(`Agent response to ${userNumber}:`, agentResponse);
 
@@ -129,12 +124,7 @@ export async function handleWebhook(req, res) {
               content: text,
             });
 
-            const agentResponse = await bookingAgent.message({
-              text,
-              userNumber,
-              userName,
-              history: userContext.conversationHistory,
-            });
+            const agentResponse = await bookingAgent.generate(text);
 
             console.log(
               `Agent response to ${userNumber}:`,
